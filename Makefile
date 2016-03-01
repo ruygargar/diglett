@@ -119,7 +119,7 @@ CXXINCS = ${addprefix -I ,${VPATH}}
 # Source files list:
 #
 CSRC = hooks.c wiring.c wiring_digital.c
-CXXSRC = main.cpp 
+CXXSRC = main.cpp HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp
 
 #
 # Objects lists:

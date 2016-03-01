@@ -1,9 +1,13 @@
 #include "Arduino.h"
+#include "HardwareSerial.h"
 
 int main()
 {
 	init();
 	pinMode(13, OUTPUT);
+	Serial.begin(115200);
+
+	Serial.println("Hello World");
 
 	while (1) 
 	{
