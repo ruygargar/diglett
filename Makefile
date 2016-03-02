@@ -108,18 +108,32 @@ ECHO = echo
 # Include files list:
 #
 
+# Core includes
 VPATH = .
 VPATH += arduino/hardware/arduino/avr/cores/arduino
 VPATH += arduino/hardware/arduino/avr/variants/mega
 
+# SD library includes
+VPATH += arduino/hardware/arduino/avr/libraries/SPI
+VPATH += arduino/libraries/SD/src
+VPATH += arduino/libraries/SD/src/utility
+
+# Expand includes
 CINCS = ${addprefix -I ,${VPATH}}
 CXXINCS = ${addprefix -I ,${VPATH}}
+
 
 #
 # Source files list:
 #
+
+# Core sources
 CSRC = hooks.c wiring.c wiring_digital.c
-CXXSRC = main.cpp HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp
+CXXSRC = main.cpp HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp SPI.cpp
+
+# SD library sources
+CXXSRC += SD.cpp File.cpp Sd2Card.cpp SdFile.cpp SdVolume.cpp
+
 
 #
 # Objects lists:
