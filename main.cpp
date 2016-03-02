@@ -1,8 +1,10 @@
 #include "Arduino.h"
-
 #include "HardwareSerial.h"
+
 #include "SPI.h"
 #include "SD.h"
+
+#include "LiquidCrystal.h"
 
 int main()
 {
@@ -12,14 +14,21 @@ int main()
 
 	Serial.println("Serial initialized.");
 
+	Serial.print("Initializing LCD... ");
+	LiquidCrystal lcd(16, 17, 23, 25, 27, 29);
+	lcd.begin(20, 4);
+	lcd.clear();
+	Serial.println( "done");
+
 	Serial.print("Initializing SD card...");
 	if (!SD.begin())
 	{
-		Serial.println("Card failed, or not present");
+		Serial.println("failed.");
+		Serial.println("Aborting execution.");
 	}
 	else
 	{
-		Serial.println(" initialized.");
+		Serial.println(" done.");
 
 		if (SD.exists("/TestFile.txt"))
 		{
@@ -28,16 +37,16 @@ int main()
 
 		Serial.print("Writing file /TestFile.txt...");
 		File myFile = SD.open("/TestFile.txt", FILE_WRITE);
-		myFile.write("This is a sample text!\r\n");
+		myFile.write("This is a sample text!");
 		myFile.flush();
 		myFile.close();
-		Serial.println(" done");
+		Serial.println(" done.");
 
-		Serial.println("Reading the file /TestFile.txt:");
+		Serial.println("Reading the file on screen [->]");
 		File myReadyFile = SD.open("/TestFile.txt", FILE_READ);
 		for (uint32_t i = 0; i < myReadyFile.size(); i++)
 		{
-			Serial.print((char)myReadyFile.read());
+			lcd.write((char) myReadyFile.read());
 		}
 		myReadyFile.close();
 	}

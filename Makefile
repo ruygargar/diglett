@@ -118,6 +118,9 @@ VPATH += arduino/hardware/arduino/avr/libraries/SPI
 VPATH += arduino/libraries/SD/src
 VPATH += arduino/libraries/SD/src/utility
 
+# LCD library includes
+VPATH += arduino/libraries/LiquidCrystal/src
+
 # Expand includes
 CINCS = ${addprefix -I ,${VPATH}}
 CXXINCS = ${addprefix -I ,${VPATH}}
@@ -133,6 +136,9 @@ CXXSRC = main.cpp HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp SP
 
 # SD library sources
 CXXSRC += SD.cpp File.cpp Sd2Card.cpp SdFile.cpp SdVolume.cpp
+
+# LCD library sources
+CXXSRC += LiquidCrystal.cpp
 
 
 #
