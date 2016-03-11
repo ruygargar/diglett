@@ -6,6 +6,8 @@
 
 #include "LiquidCrystal.h"
 
+#include "Encoder.h"
+
 int main()
 {
 	init();
@@ -20,36 +22,11 @@ int main()
 	lcd.clear();
 	Serial.println( "done");
 
-	Serial.print("Initializing SD card...");
-	if (!SD.begin())
-	{
-		Serial.println("failed.");
-		Serial.println("Aborting execution.");
-	}
-	else
-	{
-		Serial.println(" done.");
 
-		if (SD.exists("/TestFile.txt"))
-		{
-			SD.remove("/testFile.txt");
-		}
-
-		Serial.print("Writing file /TestFile.txt...");
-		File myFile = SD.open("/TestFile.txt", FILE_WRITE);
-		myFile.write("This is a sample text!");
-		myFile.flush();
-		myFile.close();
-		Serial.println(" done.");
-
-		Serial.println("Reading the file on screen [->]");
-		File myReadyFile = SD.open("/TestFile.txt", FILE_READ);
-		for (uint32_t i = 0; i < myReadyFile.size(); i++)
-		{
-			lcd.write((char) myReadyFile.read());
-		}
-		myReadyFile.close();
-	}
+	Serial.print("Initializing spinner... ");
+	Encoder Spinner;
+	Spinner.init();
+	Serial.println( "done");
 
 	while (1) 
 	{
@@ -57,6 +34,8 @@ int main()
 		delay(1000);
 		digitalWrite(13, LOW);
 		delay(1000);
+		Serial.print("Encoder value: ");
+		Serial.println(Spinner.getMovement());
 	}
 
 	return 0;

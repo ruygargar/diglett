@@ -108,8 +108,10 @@ ECHO = echo
 # Include files list:
 #
 
-# Core includes
+# Project includes
 VPATH = .
+
+# Core includes
 VPATH += arduino/hardware/arduino/avr/cores/arduino
 VPATH += arduino/hardware/arduino/avr/variants/mega
 
@@ -132,13 +134,19 @@ CXXINCS = ${addprefix -I ,${VPATH}}
 
 # Core sources
 CSRC = hooks.c wiring.c wiring_digital.c
-CXXSRC = main.cpp HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp SPI.cpp
+CXXSRC = HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp SPI.cpp
 
 # SD library sources
 CXXSRC += SD.cpp File.cpp Sd2Card.cpp SdFile.cpp SdVolume.cpp
 
 # LCD library sources
 CXXSRC += LiquidCrystal.cpp
+
+# Encoder
+CXXSRC += Encoder.cpp
+
+# Main
+CXXSRC += main.cpp
 
 
 #
