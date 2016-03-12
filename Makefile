@@ -145,6 +145,9 @@ CXXSRC += LiquidCrystal.cpp
 # Encoder
 CXXSRC += Encoder.cpp
 
+# State Machine
+CXXSRC += StateMachine.cpp
+
 # Main
 CXXSRC += main.cpp
 

@@ -1,42 +1,62 @@
 #include "Arduino.h"
 #include "HardwareSerial.h"
 
-#include "SPI.h"
-#include "SD.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-#include "LiquidCrystal.h"
+#include "StateMachine.h"
 
-#include "Encoder.h"
-
-int main()
+int main( void )
 {
 	init();
-	pinMode(13, OUTPUT);
+
 	Serial.begin(115200);
 
-	Serial.println("Serial initialized.");
+	State_t state = STATE_INIT;
+	Event_t event;
 
-	Serial.print("Initializing LCD... ");
-	LiquidCrystal lcd(16, 17, 23, 25, 27, 29);
-	lcd.begin(20, 4);
-	lcd.clear();
-	Serial.println( "done");
-
-
-	Serial.print("Initializing spinner... ");
-	Encoder Spinner;
-	Spinner.init();
-	Serial.println( "done");
-
-	while (1) 
+	while (state != STATE_TERMINATE)
 	{
-		digitalWrite(13, HIGH);
-		delay(1000);
-		digitalWrite(13, LOW);
-		delay(1000);
-		Serial.print("Encoder value: ");
-		Serial.println(Spinner.getMovement());
+		Serial.print("State: ");
+		if (state == STATE_INIT)
+		{
+			Serial.println("STATE_INIT");
+		}
+		if (state == STATE_PAINT)
+		{
+			Serial.println("STATE_PAINT");
+		}
+		if (state == STATE_CLICK)
+		{
+			Serial.println("STATE_CLICK");
+		}
+		if (state == STATE_TERMINATE)
+		{
+			Serial.println("STATE_TERMINATE");
+		}
+		Serial.flush();
+
+		while ( !(Serial.available() > 0) )
+		{
+			delay(100);
+		}
+
+		char input[2];
+		input[0] = Serial.read();
+		input[1] = '\0';
+		event = (Event_t)(atoi(input));
+
+		Serial.print("Event: ");
+		if (event == EVENT_KEYPRESS)
+			Serial.println("EVENT_KEYPRESS");
+		if (event == EVENT_MOUSEMOVE)
+			Serial.println("EVENT_MOUSEMOVE");
+		Serial.flush();
+
+		state = run_state(state, event);
 	}
+
+	while (1) {}
 
 	return 0;
 }
