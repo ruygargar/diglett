@@ -3,38 +3,49 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 
+#include "LiquidCrystal.h"
+
 #include "Logger.h"
-#include "Encoder.h"
+#include "Spinner.h"
 
-//extern "C" void __cxa_pure_virtual() { while (1); }
+extern "C" void __cxa_pure_virtual() { while (1); }
 
-Encoder * my_encoder;
+LiquidCrystal lcd(16, 17, 23, 25, 27, 29);
+
+Spinner * my_spinner;
+unsigned long time;
+char character;
 
 int main(void)
 {
 	init();
+	lcd.begin(20, 4);
+	lcd.clear();
 
 	logger_init();
 
 	while (1)
 	{
-		my_encoder = new Encoder();
+		my_spinner = new Spinner(3, SPINNERTYPE_ALPHANUMERIC);
 
-		delay(5000);
-
-		logger_println(my_encoder->getMovement());
-
-		if (my_encoder->getClick())
+		time = millis() + 10000;
+		while (time > millis())
 		{
-			logger_println("Button pushed");
-		}
-		else
-		{
-			logger_println("Button NOT pushed");
+			my_spinner->control();
+			my_spinner->draw();
+
+			character = my_spinner->character();
+			if (character != 0x00)
+			{
+				logger_print("-------------->");
+				logger_println(character);
+			}
+
+			delay(500);
 		}
 
-		delete my_encoder;
-				delay(5000);
+		delete my_spinner;
+		delay(10000);
 	}
 
 	return (0);

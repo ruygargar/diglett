@@ -123,6 +123,9 @@ VPATH += arduino/libraries/SD/src/utility
 # LCD library includes
 VPATH += arduino/libraries/LiquidCrystal/src
 
+# GUI includes
+VPATH += gui
+
 # Expand includes
 CINCS = ${addprefix -I ,${VPATH}}
 CXXINCS = ${addprefix -I ,${VPATH}}
@@ -147,6 +150,11 @@ CXXSRC += LiquidCrystal.cpp
 
 # Encoder
 CXXSRC += Encoder.cpp
+
+# GUI sources
+CXXSRC += Controller.cpp
+CXXSRC += ScreenItem.cpp
+CXXSRC += Spinner.cpp
 
 # State Machine
 CXXSRC += StateMachine.cpp
