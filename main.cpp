@@ -1,62 +1,41 @@
 #include "Arduino.h"
-#include "HardwareSerial.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 
-#include "StateMachine.h"
+#include "Logger.h"
+#include "Encoder.h"
 
-int main( void )
+//extern "C" void __cxa_pure_virtual() { while (1); }
+
+Encoder * my_encoder;
+
+int main(void)
 {
 	init();
 
-	Serial.begin(115200);
+	logger_init();
 
-	State_t state = STATE_INIT;
-	Event_t event;
-
-	while (state != STATE_TERMINATE)
+	while (1)
 	{
-		Serial.print("State: ");
-		if (state == STATE_INIT)
-		{
-			Serial.println("STATE_INIT");
-		}
-		if (state == STATE_PAINT)
-		{
-			Serial.println("STATE_PAINT");
-		}
-		if (state == STATE_CLICK)
-		{
-			Serial.println("STATE_CLICK");
-		}
-		if (state == STATE_TERMINATE)
-		{
-			Serial.println("STATE_TERMINATE");
-		}
-		Serial.flush();
+		my_encoder = new Encoder();
 
-		while ( !(Serial.available() > 0) )
+		delay(5000);
+
+		logger_println(my_encoder->getMovement());
+
+		if (my_encoder->getClick())
 		{
-			delay(100);
+			logger_println("Button pushed");
+		}
+		else
+		{
+			logger_println("Button NOT pushed");
 		}
 
-		char input[2];
-		input[0] = Serial.read();
-		input[1] = '\0';
-		event = (Event_t)(atoi(input));
-
-		Serial.print("Event: ");
-		if (event == EVENT_KEYPRESS)
-			Serial.println("EVENT_KEYPRESS");
-		if (event == EVENT_MOUSEMOVE)
-			Serial.println("EVENT_MOUSEMOVE");
-		Serial.flush();
-
-		state = run_state(state, event);
+		delete my_encoder;
+				delay(5000);
 	}
 
-	while (1) {}
-
-	return 0;
+	return (0);
 }
