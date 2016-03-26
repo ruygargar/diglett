@@ -155,6 +155,10 @@ CXXSRC += Encoder.cpp
 CXXSRC += Controller.cpp
 CXXSRC += ScreenItem.cpp
 CXXSRC += Spinner.cpp
+CXXSRC += Text.cpp
+CXXSRC += Textbox.cpp
+
+CXXSRC += SiteScreen.cpp
 
 # State Machine
 CXXSRC += StateMachine.cpp

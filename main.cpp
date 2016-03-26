@@ -8,13 +8,18 @@
 #include "Logger.h"
 #include "Spinner.h"
 
+#include "SiteScreen.h"
+
+#include "StateMachine.h"
+
 extern "C" void __cxa_pure_virtual() { while (1); }
 
 LiquidCrystal lcd(16, 17, 23, 25, 27, 29);
 
-Spinner * my_spinner;
+SiteScreen * my_screen;
+
 unsigned long time;
-char character;
+Event_t event = EVENT_NONE;
 
 int main(void)
 {
@@ -26,25 +31,19 @@ int main(void)
 
 	while (1)
 	{
-		my_spinner = new Spinner(3, SPINNERTYPE_ALPHANUMERIC);
+		event = EVENT_NONE;
+		lcd.clear();
+		my_screen = new SiteScreen();
 
 		time = millis() + 10000;
-		while (time > millis())
+		while (event == EVENT_NONE)
 		{
-			my_spinner->control();
-			my_spinner->draw();
-
-			character = my_spinner->character();
-			if (character != 0x00)
-			{
-				logger_print("-------------->");
-				logger_println(character);
-			}
-
-			delay(500);
+			my_screen->control();
+			event = my_screen->compute();
+			my_screen->draw();
 		}
 
-		delete my_spinner;
+		delete my_screen;
 		delay(10000);
 	}
 

@@ -12,6 +12,8 @@ typedef enum
 
 typedef enum
 {
+	EVENT_NONE,
+	EVENT_NEXT_PAGE,
 	EVENT_MOUSEMOVE,
 	EVENT_KEYPRESS,
 } Event_t;
