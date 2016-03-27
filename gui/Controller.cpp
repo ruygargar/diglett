@@ -13,7 +13,7 @@ Controller::~Controller()
 
 void Controller::control()
 {
-	int16_t movement = m_encoder->getMovement();
+	int16_t movement = m_encoder->getMovement() + m_microsteps;
 	int16_t movement_steps = movement / ENCODER_STEPS_REDUCTION;
 	int16_t movement_microsteps = movement % ENCODER_STEPS_REDUCTION;
 
@@ -38,8 +38,6 @@ void Controller::control()
 			movement_steps++;
 		}
 	}
-
-	m_microsteps = movement_microsteps;
 
 	if (pushed != 0)
 	{
