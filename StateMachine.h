@@ -4,26 +4,24 @@
 typedef enum
 {
 	STATE_INIT = 0,
-	STATE_PAINT,
-	STATE_CLICK,
-	STATE_TERMINATE,
-	NUM_STATES,
+	STATE_BUILD = 1,
+	STATE_DATE = 2,
+	STATE_TERMINATE = 3,
+	NUM_STATES
 } State_t;
 
 typedef enum
 {
 	EVENT_NONE,
-	EVENT_NEXT_PAGE,
-	EVENT_MOUSEMOVE,
-	EVENT_KEYPRESS,
+	EVENT_NEXT_PAGE
 } Event_t;
 
 typedef State_t State_func_t(Event_t event);
 
 // State functions
 State_t do_state_init(Event_t event);
-State_t do_state_paint(Event_t event);
-State_t do_state_click(Event_t event);
+State_t do_state_build(Event_t event);
+State_t do_state_date(Event_t event);
 State_t do_state_terminate(Event_t event);
 
 // State table

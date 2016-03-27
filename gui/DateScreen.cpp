@@ -1,28 +1,27 @@
-#include "SiteScreen.h"
+#include "DateScreen.h"
 
 #include "LiquidCrystal.h"
 extern LiquidCrystal lcd;
 
-SiteScreen::SiteScreen()
+DateScreen::DateScreen()
 {
-	m_text = new Text(0, 0, "Nombre de la obra:\0");
+	m_text = new Text(0, 0, "Fecha y hora:\0");
 	m_textbox = new Textbox(1);
-	m_spinner = new Spinner(3, SPINNERTYPE_ALPHANUMERIC);
+	m_spinner = new Spinner(3, SPINNERTYPE_NUMERIC);
 }
 
-SiteScreen::~SiteScreen()
+DateScreen::~DateScreen()
 {
-	delete m_text;
 	delete m_textbox;
 	delete m_spinner;
 }
 
-void SiteScreen::control()
+void DateScreen::control()
 {
 	m_spinner->control();
 }
 
-Event_t SiteScreen::compute()
+Event_t DateScreen::compute()
 {
 	char spinner_char = m_spinner->character();
 
@@ -32,7 +31,7 @@ Event_t SiteScreen::compute()
 	}
 
 	if (spinner_char == 0x00)
-	{ }
+	{}
 	else if (spinner_char == 0x7F)
 	{
 		m_textbox->popChar();
@@ -45,7 +44,7 @@ Event_t SiteScreen::compute()
 	return EVENT_NONE;
 }
 
-void SiteScreen::draw()
+void DateScreen::draw()
 {
 	lcd.clear();
 	m_text->draw();

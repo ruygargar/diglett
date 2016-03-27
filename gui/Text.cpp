@@ -1,7 +1,5 @@
 #include "Text.h"
 
-#include "Logger.h"
-
 #include "LiquidCrystal.h"
 extern LiquidCrystal lcd;
 

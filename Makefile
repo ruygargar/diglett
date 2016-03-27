@@ -158,7 +158,9 @@ CXXSRC += Spinner.cpp
 CXXSRC += Text.cpp
 CXXSRC += Textbox.cpp
 
-CXXSRC += SiteScreen.cpp
+CXXSRC += DateScreen.cpp SiteScreen.cpp
+
+CXXSRC += GuiManager.cpp
 
 # State Machine
 CXXSRC += StateMachine.cpp

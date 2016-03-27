@@ -17,8 +17,6 @@ static void update_button();
 
 Encoder::Encoder()
 {
-	logger_println("-> Encoder()");
-
 	// Init pins
 	pinMode(PIN_ENCODER_PHA, INPUT);
 	digitalWrite(PIN_ENCODER_PHA, HIGH);
@@ -37,16 +35,10 @@ Encoder::Encoder()
 	OCR5AL = 0x40;
 
 	init();
-
-	logger_println("<- Encoder()");
 }
 
 Encoder::~Encoder()
 {
-	logger_println("-> ~Encoder()");
-
-	logger_println("-- DISABLE ENCODER INTERRUPT --");
-	logger_signal_off();
 	TIMSK5 &= ~(0x01);
 
 	TCCR0A = 0x00;
@@ -54,14 +46,10 @@ Encoder::~Encoder()
 
 	OCR5AH = 0x00;
 	OCR5AL = 0x00;
-
-	logger_println("<- ~Encoder()");
 }
 
 void Encoder::init()
 {
-	logger_println("-> Encoder::init()");
-
 	TIMSK5 &= ~(0x01);
 
 	encoder_input_last = read_pins();
@@ -73,32 +61,21 @@ void Encoder::init()
 	TCNT5H = 0x00;
 	TCNT5L = 0x00;
 
-	logger_println("-- ENABLE ENCODER INTERRUPT --");
 	TIMSK5 |= 0x01;
-
-	logger_println("<- Encoder::init()");
 }
 
 int16_t Encoder::getMovement()
 {
-	logger_println("-> Encoder::getMovement()");
-
 	int16_t movement = encoder_position;
 	encoder_position = 0;
-
-	logger_println("<- Encoder::getMovement()");
 	return movement;
 }
 
 
 bool Encoder::getClick()
 {
-	logger_println("-> Encoder::getClick()");
-
 	bool click = button_clicked;
 	button_clicked = false;
-
-	logger_println("<- Encoder::getClick()");
 	return click;
 }
 
@@ -202,7 +179,6 @@ static void update_button()
 
 ISR(TIMER5_OVF_vect)
 {
-	logger_signal_on();
 	// Every 500 us
 	timer_software++;
 	update_encoder();

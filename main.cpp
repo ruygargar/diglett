@@ -6,20 +6,14 @@
 #include "LiquidCrystal.h"
 
 #include "Logger.h"
-#include "Spinner.h"
-
-#include "SiteScreen.h"
-
 #include "StateMachine.h"
+#include "GuiManager.h"
 
 extern "C" void __cxa_pure_virtual() { while (1); }
 
 LiquidCrystal lcd(16, 17, 23, 25, 27, 29);
 
-SiteScreen * my_screen;
-
-unsigned long time;
-Event_t event = EVENT_NONE;
+GuiManager * gui;
 
 int main(void)
 {
@@ -29,22 +23,15 @@ int main(void)
 
 	logger_init();
 
+	gui = new GuiManager();
+
+	State_t state = STATE_INIT;
+	Event_t event = EVENT_NONE;
+
 	while (1)
 	{
-		event = EVENT_NONE;
-		lcd.clear();
-		my_screen = new SiteScreen();
-
-		time = millis() + 10000;
-		while (event == EVENT_NONE)
-		{
-			my_screen->control();
-			event = my_screen->compute();
-			my_screen->draw();
-		}
-
-		delete my_screen;
-		delay(10000);
+		event = gui->run();
+		state = run_state(state, event);
 	}
 
 	return (0);

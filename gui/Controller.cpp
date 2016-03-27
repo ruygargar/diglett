@@ -1,29 +1,24 @@
 #include "Controller.h"
 
-#include "Logger.h"
-
 Controller::Controller()
 	: m_microsteps(0)
 {
-	logger_println("-> Controller()");
 	m_encoder = new Encoder();
-	logger_println("<- Controller()");
 }
 
 Controller::~Controller()
 {
-	logger_println("-> ~Controller()");
 	delete m_encoder;
-	logger_println("<- ~Controller()");
 }
 
 void Controller::control()
 {
-	logger_println("-> Controller::control()");
-
 	int16_t movement = m_encoder->getMovement();
 	int16_t movement_steps = movement / ENCODER_STEPS_REDUCTION;
 	int16_t movement_microsteps = movement % ENCODER_STEPS_REDUCTION;
+
+	m_microsteps = movement_microsteps;
+
 	bool pushed = m_encoder->getClick();
 
 	if (movement_steps > 0)
@@ -50,5 +45,4 @@ void Controller::control()
 	{
 		push();
 	}
-	logger_println("<- Controller::control()");
 }
