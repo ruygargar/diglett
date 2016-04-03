@@ -2,6 +2,10 @@
 
 #include "SiteScreen.h"
 #include "DateScreen.h"
+#include "ScreenMenu.h"
+#include "ScreenPoint.h"
+#include "ScreenProbing.h"
+#include "ScreenTerminate.h"
 
 #include <stddef.h>
 #include "Logger.h"
@@ -49,9 +53,26 @@ void GuiManager::createScreen(ScreenIndex_t id)
 			break;
 		}
 
-		case SCREEN_DATE:
+		case SCREEN_NEW_POINT:
 		{
-			m_screen = new DateScreen();
+			m_screen = new ScreenPoint();
+			break;
+		}
+
+		case SCREEN_PROBING:
+		{
+			m_screen = new ScreenProbing();
+			break;
+		}
+
+		case SCREEN_MENU:
+		{
+			m_screen = new ScreenMenu();
+			break;
+		}
+		case SCREEN_TERMINATE:
+		{
+			m_screen = new ScreenTerminate();
 			break;
 		}
 	}

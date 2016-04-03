@@ -156,11 +156,13 @@ CXXSRC += Encoder.cpp
 # GUI sources
 CXXSRC += Controller.cpp
 CXXSRC += ScreenItem.cpp
+CXXSRC += Button.cpp
+CXXSRC += Selector.cpp
 CXXSRC += Spinner.cpp
 CXXSRC += Text.cpp
 CXXSRC += Textbox.cpp
 
-CXXSRC += DateScreen.cpp SiteScreen.cpp
+CXXSRC += DateScreen.cpp SiteScreen.cpp ScreenMenu.cpp ScreenPoint.cpp ScreenProbing.cpp ScreenTerminate.cpp
 
 CXXSRC += GuiManager.cpp
 

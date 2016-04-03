@@ -4,24 +4,32 @@
 typedef enum
 {
 	STATE_INIT = 0,
-	STATE_BUILD = 1,
-	STATE_DATE = 2,
-	STATE_TERMINATE = 3,
+	STATE_NEW_BUILD,
+	STATE_NEW_POINT,
+	STATE_PROBING,
+	STATE_MENU,
+	STATE_TERMINATE,
 	NUM_STATES
 } State_t;
 
 typedef enum
 {
 	EVENT_NONE,
-	EVENT_NEXT_PAGE
+	EVENT_NEXT_PAGE,
+	EVENT_JUMP_PROBING,
+	EVENT_JUMP_NEW_POINT,
+	EVENT_JUMP_NEW_BUILD,
+	EVENT_JUMP_TERMINATE
 } Event_t;
 
 typedef State_t State_func_t(Event_t event);
 
 // State functions
 State_t do_state_init(Event_t event);
-State_t do_state_build(Event_t event);
-State_t do_state_date(Event_t event);
+State_t do_state_new_build(Event_t event);
+State_t do_state_new_point(Event_t event);
+State_t do_state_probing(Event_t);
+State_t do_state_menu(Event_t);
 State_t do_state_terminate(Event_t event);
 
 // State table
