@@ -125,6 +125,8 @@ VPATH += arduino/libraries/LiquidCrystal/src
 
 # GUI includes
 VPATH += gui
+VPATH += gui/Items
+VPATH += gui/Screens
 
 # Expand includes
 CINCS = ${addprefix -I ,${VPATH}}
@@ -139,14 +141,14 @@ CXXINCS = ${addprefix -I ,${VPATH}}
 CSRC = hooks.c wiring.c wiring_digital.c
 CXXSRC = HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp SPI.cpp new.cpp
 
-# Logger sources
-CXXSRC += Logger.cpp
-
 # SD library sources
 CXXSRC += SD.cpp File.cpp Sd2Card.cpp SdFile.cpp SdVolume.cpp
 
 # LCD library sources
 CXXSRC += LiquidCrystal.cpp
+
+# Logger sources
+CXXSRC += Logger.cpp
 
 # Encoder
 CXXSRC += Encoder.cpp
