@@ -204,13 +204,7 @@ $(BUILD_DIR)/%.o: %.cpp
 
 # Flash the device
 upload: $(BUILD_DIR)/$(TARGET).hex
-ifeq (${AVRDUDE_PROGRAMMER}, arduino)
-	stty hup < $(UPLOAD_PORT); true
-endif
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH)
-ifeq (${AVRDUDE_PROGRAMMER}, arduino)
-	stty -hup < $(UPLOAD_PORT); true
-endif
 
 clean:
 	@ $(ECHO) "  RMDIR $(BUILD_DIR)/"
