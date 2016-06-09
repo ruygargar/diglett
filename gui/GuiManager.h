@@ -2,6 +2,8 @@
 #define GUI_MANAGER_H
 
 #include "StateMachine.h"
+
+#include "SensorManager.h"
 #include "Screen.h"
 
 typedef enum
@@ -18,7 +20,7 @@ typedef enum
 class GuiManager
 {
 	public:
-		GuiManager();
+		GuiManager(SensorManager * model_sensors);
 		~GuiManager();
 
 		Event_t run();
@@ -28,6 +30,8 @@ class GuiManager
 	private:
 		Screen * m_screen;
 		Event_t m_event;
+
+		SensorManager * m_model_sensors;
 };
 
 #endif // GUI_MANAGER_H

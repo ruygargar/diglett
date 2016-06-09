@@ -10,9 +10,10 @@
 #include <stddef.h>
 #include "Logger.h"
 
-GuiManager::GuiManager()
+GuiManager::GuiManager(SensorManager * model_sensors)
 	: m_event(EVENT_NONE)
 	, m_screen(NULL)
+	, m_model_sensors(model_sensors)
 {}
 
 GuiManager::~GuiManager()
@@ -61,7 +62,7 @@ void GuiManager::createScreen(ScreenIndex_t id)
 
 		case SCREEN_PROBING:
 		{
-			m_screen = new ScreenProbing();
+			m_screen = new ScreenProbing(m_model_sensors);
 			break;
 		}
 

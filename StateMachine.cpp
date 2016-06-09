@@ -20,12 +20,12 @@ State_func_t * const state_table[NUM_STATES] =
 
 State_t run_state(State_t current_state, Event_t event)
 {
-	logger_println("-> run_state()");
-	logger_print("State: ");
-	logger_println((int) current_state);
-	logger_print("Event: ");
-	logger_println((int) event);
-	logger_println("<- run_state()");
+	// logger_println("-> run_state()");
+	// logger_print("State: ");
+	// logger_println((int) current_state);
+	// logger_print("Event: ");
+	// logger_println((int) event);
+	// logger_println("<- run_state()");
 	return state_table[current_state](event);
 }
 
