@@ -166,6 +166,9 @@ CXXSRC += DateScreen.cpp SiteScreen.cpp ScreenMenu.cpp ScreenPoint.cpp ScreenPro
 
 CXXSRC += GuiManager.cpp
 
+# Sensors Sources
+CXXSRC += SensorManager.cpp
+
 # State Machine
 CXXSRC += StateMachine.cpp
 
