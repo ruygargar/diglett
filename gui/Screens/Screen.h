@@ -6,6 +6,8 @@
 class Screen
 {
 	public:
+		Screen() {};
+		virtual ~Screen() {};
 		virtual void control() = 0;
 		virtual Event_t compute() = 0;
 		virtual void draw() = 0;
