@@ -7,10 +7,14 @@
 void logger_init();
 
 void logger_print(char * string);
+void logger_print(const char * string);
 void logger_print(int number);
+void logger_print(float number);
 
 void logger_println(char * string);
+void logger_println(const char * string);
 void logger_println(int number);
+void logger_println(float number);
 
 void logger_signal_on();
 void logger_signal_off();

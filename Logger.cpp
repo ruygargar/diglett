@@ -17,7 +17,19 @@ void logger_print(char * string)
 	Serial.flush();
 }
 
+void logger_print(const char * string)
+{
+	Serial.print(string);
+	Serial.flush();
+}
+
 void logger_print(int number)
+{
+	Serial.print(number);
+	Serial.flush();
+}
+
+void logger_print(float number)
 {
 	Serial.print(number);
 	Serial.flush();
@@ -31,7 +43,19 @@ void logger_println(char * string)
 	Serial.flush();
 }
 
+void logger_println(const char * string)
+{
+	Serial.println(string);
+	Serial.flush();
+}
+
 void logger_println(int number)
+{
+	Serial.println(number);
+	Serial.flush();
+}
+
+void logger_println(float number)
 {
 	Serial.println(number);
 	Serial.flush();
