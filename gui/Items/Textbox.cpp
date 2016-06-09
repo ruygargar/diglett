@@ -47,7 +47,10 @@ void Textbox::pushChar(char character)
 }
 
 void Textbox::pushString(char * text)
-{ }
+{
+	strncpy((m_text + m_index), text, (m_length - m_index));
+	m_index = strlen(m_text);
+}
 
 void Textbox::popChar()
 {
@@ -57,6 +60,12 @@ void Textbox::popChar()
 		*(fill) = '\0';
 		m_index--;
 	}
+}
+
+void Textbox::flush()
+{
+	m_index = 0;
+	memset(m_text, '\0', m_length);
 }
 
 const char * Textbox::text()

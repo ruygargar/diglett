@@ -17,6 +17,7 @@ class Textbox : public ScreenItem
 		void pushChar(char character);
 		void pushString(char * string);
 		void popChar();
+		void flush();
 
 		const char * text();
 
