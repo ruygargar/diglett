@@ -2,6 +2,7 @@
 #define SITE_SCREEN_H
 
 #include "Screen.h"
+#include "BundleCharPtr.h"
 
 #include "Text.h"
 #include "Textbox.h"
@@ -16,6 +17,8 @@ class SiteScreen : public Screen
 		void control();
 		Event_t compute();
 		void draw();
+
+		BundleCharPtr * saveContext();
 
 	private:
 		Text * m_text;

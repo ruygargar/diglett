@@ -3,10 +3,11 @@
 #include "StateMachine.h"
 #include "GuiManager.h"
 
+#include "BundleCharPtr.h"
+
 #include "Logger.h"
 
 extern GuiManager * gui;
-
 
 State_func_t * const state_table[NUM_STATES] =
 {
@@ -40,7 +41,14 @@ State_t do_state_new_build(Event_t event)
 	if (event == EVENT_NEXT_PAGE)
 	{
 		gui->createScreen(SCREEN_NEW_POINT);
-		return STATE_NEW_POINT;
+
+		BundleCharPtr * bundle = (BundleCharPtr *) gui->getBundle();
+		if (bundle != NULL)
+		{
+			logger_println(bundle->get());
+		}
+
+	return STATE_NEW_POINT;
 	}
 
 	return STATE_NEW_BUILD;

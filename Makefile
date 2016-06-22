@@ -125,6 +125,7 @@ VPATH += arduino/libraries/LiquidCrystal/src
 
 # GUI includes
 VPATH += gui
+VPATH += gui/Bundles
 VPATH += gui/Items
 VPATH += gui/Screens
 
@@ -163,6 +164,8 @@ CXXSRC += Text.cpp
 CXXSRC += Textbox.cpp
 
 CXXSRC += DateScreen.cpp SiteScreen.cpp ScreenMenu.cpp ScreenPoint.cpp ScreenProbing.cpp ScreenTerminate.cpp
+
+CXXSRC += BundleCharPtr.cpp
 
 CXXSRC += GuiManager.cpp
 

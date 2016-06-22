@@ -7,6 +7,7 @@
 
 #include "Logger.h"
 #include "StateMachine.h"
+
 #include "GuiManager.h"
 #include "SensorManager.h"
 
@@ -20,10 +21,10 @@ SensorManager * sensors;
 int main(void)
 {
 	init();
+	logger_init();
+
 	lcd.begin(20, 4);
 	lcd.clear();
-
-	logger_init();
 
 	sensors = new SensorManager();
 	gui = new GuiManager(sensors);

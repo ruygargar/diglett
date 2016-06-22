@@ -3,6 +3,8 @@
 #include "LiquidCrystal.h"
 extern LiquidCrystal lcd;
 
+#include "Logger.h"
+
 SiteScreen::SiteScreen()
 {
 	m_text = new Text(0, 0, "Nombre de la obra:\0");
@@ -51,4 +53,13 @@ void SiteScreen::draw()
 	m_text->draw();
 	m_textbox->draw();
 	m_spinner->draw();
+}
+
+BundleCharPtr * SiteScreen::saveContext()
+{
+	logger_println("-> SiteScreen::saveContext()");
+	BundleCharPtr * bundle = new BundleCharPtr();
+	bundle->put(m_textbox->text());
+	logger_println("<- SiteScreen::saveContext()");
+	return bundle;
 }

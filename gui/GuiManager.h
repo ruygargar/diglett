@@ -3,8 +3,10 @@
 
 #include "StateMachine.h"
 
-#include "SensorManager.h"
 #include "Screen.h"
+#include "BundleBase.h"
+
+#include "SensorManager.h"
 
 typedef enum
 {
@@ -26,12 +28,14 @@ class GuiManager
 		Event_t run();
 
 		void createScreen(ScreenIndex_t);
+		BundleBase * getBundle() { return m_bundle; };
 
 	private:
 		Screen * m_screen;
 		Event_t m_event;
 
 		SensorManager * m_model_sensors;
+		BundleBase * m_bundle;
 };
 
 #endif // GUI_MANAGER_H

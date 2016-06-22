@@ -14,6 +14,7 @@ GuiManager::GuiManager(SensorManager * model_sensors)
 	: m_event(EVENT_NONE)
 	, m_screen(NULL)
 	, m_model_sensors(model_sensors)
+	, m_bundle(NULL)
 {}
 
 GuiManager::~GuiManager()
@@ -41,11 +42,22 @@ Event_t GuiManager::run()
 void GuiManager::createScreen(ScreenIndex_t id)
 {
 	logger_println("-> GuiManager::createScreen()");
+
+	if (m_bundle != NULL)
+	{
+		logger_println("-- delete bundle");
+		delete m_bundle;
+	}
+
 	if (m_screen != NULL)
 	{
+		logger_println("-- save new bundle");
+		m_bundle = m_screen->saveContext();
+		logger_println("-- delete screen");
 		delete m_screen;
 	}
 
+	logger_println("-- create new screen");
 	switch(id)
 	{
 		case SCREEN_BUILD:
