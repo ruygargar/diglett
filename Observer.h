@@ -16,7 +16,7 @@ template <typename T>
 		virtual void update(T value) = 0;
 		void connect();
 
-	public:
+	protected:
 		Subject<T> * m_model;
 };
 
