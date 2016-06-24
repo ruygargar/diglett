@@ -1,11 +1,6 @@
 #include "Arduino.h"
-
-//#include <stdio.h>
-//#include <stdlib.h>
-
 #include "LiquidCrystal.h"
 
-#include "Logger.h"
 #include "StateMachine.h"
 
 #include "GuiManager.h"
@@ -23,7 +18,6 @@ SensorManager * sensors;
 int main(void)
 {
 	init();
-	logger_init();
 
 	lcd.begin(20, 4);
 	lcd.clear();

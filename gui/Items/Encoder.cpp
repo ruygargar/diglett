@@ -1,8 +1,6 @@
 #include "Arduino.h"
 #include "Encoder.h"
 
-#include "Logger.h"
-
 static uint8_t timer_software = 0;
 
 static int16_t encoder_position;
