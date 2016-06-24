@@ -172,6 +172,9 @@ CXXSRC += GuiManager.cpp
 # Sensors Sources
 CXXSRC += SensorManager.cpp
 
+# SD Logger
+CXXSRC += DataManager.cpp
+
 # State Machine
 CXXSRC += StateMachine.cpp
 

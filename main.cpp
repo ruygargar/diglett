@@ -10,12 +10,14 @@
 
 #include "GuiManager.h"
 #include "SensorManager.h"
+#include "DataManager.h"
 
 extern "C" void __cxa_pure_virtual() { while (1); }
 
 LiquidCrystal lcd(16, 17, 23, 25, 27, 29);
 
 GuiManager * gui;
+DataManager * data;
 SensorManager * sensors;
 
 int main(void)
@@ -26,6 +28,7 @@ int main(void)
 	lcd.begin(20, 4);
 	lcd.clear();
 
+	data = new DataManager();
 	sensors = new SensorManager();
 	gui = new GuiManager(sensors);
 

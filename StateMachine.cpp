@@ -2,12 +2,14 @@
 
 #include "StateMachine.h"
 #include "GuiManager.h"
+#include "DataManager.h"
 
 #include "BundleCharPtr.h"
 
 #include "Logger.h"
 
 extern GuiManager * gui;
+extern DataManager * data;
 
 State_func_t * const state_table[NUM_STATES] =
 {
@@ -40,15 +42,16 @@ State_t do_state_new_build(Event_t event)
 {
 	if (event == EVENT_NEXT_PAGE)
 	{
+		data->resetPointNumber();
 		gui->createScreen(SCREEN_NEW_POINT);
 
 		BundleCharPtr * bundle = (BundleCharPtr *) gui->getBundle();
 		if (bundle != NULL)
 		{
-			logger_println(bundle->get());
+			data->newBuild(bundle->get());
 		}
 
-	return STATE_NEW_POINT;
+		return STATE_NEW_POINT;
 	}
 
 	return STATE_NEW_BUILD;
@@ -58,6 +61,7 @@ State_t do_state_new_point(Event_t event)
 {
 	if (event == EVENT_NEXT_PAGE)
 	{
+		data->newProbingPoint();
 		gui->createScreen(SCREEN_PROBING);
 		return STATE_PROBING;
 	}
@@ -84,6 +88,7 @@ State_t do_state_menu(Event_t event)
 	}
 	else if (event == EVENT_JUMP_NEW_POINT)
 	{
+		data->incrementPointNumber();
 		gui->createScreen(SCREEN_NEW_POINT);
 		return STATE_NEW_POINT;
 	}
@@ -95,6 +100,7 @@ State_t do_state_menu(Event_t event)
 	else if (event == EVENT_JUMP_TERMINATE)
 	{
 		gui->createScreen(SCREEN_TERMINATE);
+		data->terminate();
 		return STATE_TERMINATE;
 	}
 	return STATE_MENU;
