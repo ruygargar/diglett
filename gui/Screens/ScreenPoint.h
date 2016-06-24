@@ -6,10 +6,12 @@
 #include "Button.h"
 #include "Text.h"
 
+#include <stdint.h>
+
 class ScreenPoint : public Screen
 {
 	public:
-		ScreenPoint();
+		ScreenPoint(uint16_t number);
 		~ScreenPoint();
 
 		void control();
@@ -18,6 +20,7 @@ class ScreenPoint : public Screen
 
 	private:
 		Text * m_text_point;
+		Text * m_text_point_number;
 		Text * m_text_instructions;
 		Button * m_button;
 };

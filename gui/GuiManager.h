@@ -6,6 +6,7 @@
 #include "Screen.h"
 #include "BundleBase.h"
 
+#include "DataManager.h"
 #include "SensorManager.h"
 
 typedef enum
@@ -22,7 +23,7 @@ typedef enum
 class GuiManager
 {
 	public:
-		GuiManager(SensorManager * model_sensors);
+		GuiManager(DataManager * model_data, SensorManager * model_sensors);
 		~GuiManager();
 
 		Event_t run();
@@ -34,6 +35,7 @@ class GuiManager
 		Screen * m_screen;
 		Event_t m_event;
 
+		DataManager * m_model_data;
 		SensorManager * m_model_sensors;
 		BundleBase * m_bundle;
 };

@@ -10,9 +10,10 @@
 #include <stddef.h>
 #include "Logger.h"
 
-GuiManager::GuiManager(SensorManager * model_sensors)
+GuiManager::GuiManager(DataManager * model_data, SensorManager * model_sensors)
 	: m_event(EVENT_NONE)
 	, m_screen(NULL)
+	, m_model_data(model_data)
 	, m_model_sensors(model_sensors)
 	, m_bundle(NULL)
 {}
@@ -62,29 +63,34 @@ void GuiManager::createScreen(ScreenIndex_t id)
 	{
 		case SCREEN_BUILD:
 		{
+			logger_println("-- -- SiteScreen");
 			m_screen = new SiteScreen();
 			break;
 		}
 
 		case SCREEN_NEW_POINT:
 		{
-			m_screen = new ScreenPoint();
+			logger_println("-- -- ScreenPoint");
+			m_screen = new ScreenPoint(m_model_data->getPointNumber());
 			break;
 		}
 
 		case SCREEN_PROBING:
 		{
+			logger_println("-- -- ScreenProbing");
 			m_screen = new ScreenProbing(m_model_sensors);
 			break;
 		}
 
 		case SCREEN_MENU:
 		{
+			logger_println("-- -- ScreenMenu");
 			m_screen = new ScreenMenu();
 			break;
 		}
 		case SCREEN_TERMINATE:
 		{
+			logger_println("-- -- ScreenTerminate");
 			m_screen = new ScreenTerminate();
 			break;
 		}

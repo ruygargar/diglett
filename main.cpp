@@ -30,7 +30,7 @@ int main(void)
 
 	data = new DataManager();
 	sensors = new SensorManager();
-	gui = new GuiManager(sensors);
+	gui = new GuiManager(data, sensors);
 
 	State_t state = STATE_INIT;
 	Event_t event = EVENT_NONE;
