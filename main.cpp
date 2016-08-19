@@ -22,8 +22,8 @@ int main(void)
 	lcd.begin(20, 4);
 	lcd.clear();
 
-	data = new DataManager();
 	sensors = new SensorManager();
+	data = new DataManager(sensors);
 	gui = new GuiManager(data, sensors);
 
 	State_t state = STATE_INIT;

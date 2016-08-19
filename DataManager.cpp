@@ -4,11 +4,10 @@
 #include <string.h>
 #include "SD.h"
 
-DataManager::DataManager()
-	: m_file_number(1)
+DataManager::DataManager(Subject<sensor_t> * model)
+	: Observer<sensor_t>(model, OBSERVER_LOGGER)
+	, m_file_number(1)
 	, m_file(NULL)
-	, m_distance(0.0)
-	, m_pressure(1.0)
 {
 	m_directory_name = new char[21];
 	m_file_name = new char[10];
@@ -72,6 +71,23 @@ void DataManager::incrementPointNumber()
 uint16_t DataManager::getPointNumber()
 {
 	return m_file_number;
+}
+
+void DataManager::update(sensor_t value)
+{
+	if (m_file != NULL)
+	{
+		char position[6] = {"\0"};
+		dtostrf(value.position, 4, 3, position);
+		char pressure[6] = {"\0"};
+		dtostrf(value.pressure, 4, 1, pressure);
+
+		m_file->write(position);
+		m_file->write(",");
+		m_file->write(pressure);
+		m_file->write("\r\n");
+		m_file->flush();
+	}
 }
 
 

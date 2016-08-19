@@ -1,14 +1,16 @@
 #ifndef DATA_LOGGER_H
 #define DATA_LOGGER_H
 
+#include "Observer.h"
+#include "SensorManager.h"
 #include "SD.h"
 
 #include <stdint.h>
 
-class DataManager
+class DataManager : public Observer<sensor_t>
 {
 	public:
-		DataManager();
+		DataManager(Subject<sensor_t> * model);
 		~DataManager();
 
 		void newBuild(const char * name);
@@ -18,6 +20,8 @@ class DataManager
 		void resetPointNumber();
 		void incrementPointNumber();
 		uint16_t getPointNumber();
+
+		void update(sensor_t value);
 
 	private:
 		void setFolder(const char * directory);
@@ -32,9 +36,6 @@ class DataManager
 		uint16_t m_file_number;
 
 		File * m_file;
-
-		float m_distance;
-		float m_pressure;
 };
 
 #endif // DATA_LOGGER_H
