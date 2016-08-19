@@ -11,30 +11,55 @@ template <typename T>
 		Subject();
 		virtual ~Subject() {};
 
-		void attach(Observer<T> * observer);
-		void deattach();
+		void attach(Observer<T> * observer, ObserverType type);
+		void deattach(ObserverType type);
 		virtual void notify() = 0;
 
 	protected:
-		Observer<T> * m_observer;
+		Observer<T> * m_observer_gui;
+		Observer<T> * m_observer_logger;
 };
 
 template <typename T>
 	Subject<T>::Subject()
+	: m_observer_gui(NULL)
+	, m_observer_logger(NULL)
+{}
+
+template <typename T>
+	void Subject<T>::attach(Observer<T> * observer, ObserverType type)
 {
-	m_observer = NULL;
+	switch (type)
+	{
+		case OBSERVER_GUI:
+		{
+			m_observer_gui = observer;
+			break;
+		}
+		case OBSERVER_LOGGER:
+		{
+			m_observer_logger = observer;
+			break;
+		}
+	}
 };
 
 template <typename T>
-	void Subject<T>::attach(Observer<T> * observer)
+	void Subject<T>::deattach(ObserverType type)
 {
-	m_observer = observer;
-};
-
-template <typename T>
-	void Subject<T>::deattach()
-{
-	m_observer = NULL;
+	switch (type)
+	{
+		case OBSERVER_GUI:
+		{
+			m_observer_gui = NULL;
+			break;
+		}
+		case OBSERVER_LOGGER:
+		{
+			m_observer_logger = NULL;
+			break;
+		}
+	}
 };
 
 #endif // SUBJECT_H

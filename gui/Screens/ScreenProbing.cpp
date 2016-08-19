@@ -6,7 +6,7 @@
 extern LiquidCrystal lcd;
 
 ScreenProbing::ScreenProbing(Subject<sensor_t> * model)
-	: Observer<sensor_t>(model)
+	: Observer<sensor_t>(model, OBSERVER_GUI)
 {
 	m_text_distance = new Text(0, 0, "Distancia [m]:\0");
 	m_text_distance_value = new Textbox(0, 15, 6);

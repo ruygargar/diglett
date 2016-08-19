@@ -29,8 +29,13 @@ void SensorManager::readData()
 
 void SensorManager::notify()
 {
-	if (this->m_observer != NULL)
+	if (this->m_observer_gui != NULL)
 	{
-		this->m_observer->update(m_sensor);
+		this->m_observer_gui->update(m_sensor);
+	}
+
+	if (this->m_observer_logger != NULL)
+	{
+		this->m_observer_logger->update(m_sensor);
 	}
 }
