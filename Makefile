@@ -139,7 +139,7 @@ CXXINCS = ${addprefix -I ,${VPATH}}
 #
 
 # Core sources
-CSRC = hooks.c wiring.c wiring_digital.c
+CSRC = hooks.c wiring.c wiring_analog.c wiring_digital.c
 CXXSRC = HardwareSerial.cpp HardwareSerial0.cpp Stream.cpp Print.cpp SPI.cpp new.cpp
 
 # SD library sources
