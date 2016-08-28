@@ -20,7 +20,7 @@ endif
 BUILD_DIR          = build
 
 # Binary output name:
-TARGET             = tmp
+TARGET             = diglett
 
 
 
