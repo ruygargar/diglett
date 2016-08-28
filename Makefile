@@ -170,6 +170,7 @@ CXXSRC += BundleCharPtr.cpp
 CXXSRC += GuiManager.cpp
 
 # Sensors Sources
+CXXSRC += SensorAnalog.cpp
 CXXSRC += SensorManager.cpp
 
 # SD Logger
