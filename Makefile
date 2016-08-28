@@ -129,6 +129,9 @@ VPATH += gui/Bundles
 VPATH += gui/Items
 VPATH += gui/Screens
 
+# Utils include
+VPATH += utils
+
 # Expand includes
 CINCS = ${addprefix -I ,${VPATH}}
 CXXINCS = ${addprefix -I ,${VPATH}}
