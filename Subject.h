@@ -13,6 +13,8 @@ template <typename T>
 
 		void attach(Observer<T> * observer, ObserverType type);
 		void deattach(ObserverType type);
+
+	protected:
 		virtual void notify() = 0;
 
 	protected:
