@@ -16,7 +16,13 @@ SensorAnalog::~SensorAnalog()
 {}
 
 void SensorAnalog::init()
-{}
+{
+	m_rawData = 0;
+	m_accumulatedRawData = 0;
+	m_measuresTaken = 0;
+	m_newDataAvailable = false;
+	m_data = 0.0;
+}
 
 void SensorAnalog::measure()
 {
