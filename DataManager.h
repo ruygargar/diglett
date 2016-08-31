@@ -30,12 +30,16 @@ class DataManager : public Observer<sensor_t>
 		void open();
 		void close();
 
+		bool filterData(float value);
+
 	private:
 		char * m_directory_name;
 		char * m_file_name;
 		uint16_t m_file_number;
 
 		File * m_file;
+
+		float m_data;
 };
 
 #endif // DATA_LOGGER_H

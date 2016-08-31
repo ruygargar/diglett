@@ -8,6 +8,7 @@ DataManager::DataManager(Subject<sensor_t> * model)
 	: Observer<sensor_t>(model, OBSERVER_LOGGER)
 	, m_file_number(1)
 	, m_file(NULL)
+	, m_data{0.0}
 {
 	m_directory_name = new char[21];
 	m_file_name = new char[10];
@@ -49,6 +50,7 @@ void DataManager::newProbingPoint()
 	char filename[10] = { "\0" };
 	sprintf(filename, "Punto_%d", m_file_number);
 	setFile(filename);
+	m_data = 0.0;
 
 	open();
 }
@@ -75,10 +77,15 @@ uint16_t DataManager::getPointNumber()
 
 void DataManager::update(sensor_t value)
 {
-	if (m_file != NULL)
+	if (m_file == NULL)
+	{
+		return;
+	}
+
+	if (filterData(value.position) == true)
 	{
 		char position[6] = {"\0"};
-		dtostrf(value.position, 4, 3, position);
+		dtostrf(value.position, 5, 3, position);
 		char pressure[6] = {"\0"};
 		dtostrf(value.pressure, 4, 1, pressure);
 
@@ -120,4 +127,14 @@ void DataManager::close()
 		m_file->close();
 		delete m_file;
 	}
+}
+
+bool DataManager::filterData(float value)
+{
+	if (m_data < value)
+	{
+		m_data = value;
+		return true;
+	}
+	return false;
 }
