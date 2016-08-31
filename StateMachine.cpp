@@ -3,11 +3,13 @@
 #include "StateMachine.h"
 #include "GuiManager.h"
 #include "DataManager.h"
+#include "SensorManager.h"
 
 #include "BundleCharPtr.h"
 
 extern GuiManager * gui;
 extern DataManager * data;
+extern SensorManager * sensors;
 
 State_func_t * const state_table[NUM_STATES] =
 {
@@ -53,6 +55,7 @@ State_t do_state_new_point(Event_t event)
 {
 	if (event == EVENT_NEXT_PAGE)
 	{
+		sensors->init();
 		data->newProbingPoint();
 		gui->createScreen(SCREEN_PROBING);
 		return STATE_PROBING;
